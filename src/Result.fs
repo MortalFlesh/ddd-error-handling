@@ -24,6 +24,10 @@ module Result =
         // to the initial value
         List.foldBack consR aListOfResults initialValue
 
+    let ofOption error = function
+        | Some value -> Ok value
+        | _ -> Error error
+
 [<AutoOpen>]
 module ResultComputationExpression =
     // https://github.com/swlaschin/DomainModelingMadeFunctional/blob/master/src/OrderTaking/Result.fs#L178
