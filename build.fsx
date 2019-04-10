@@ -11,14 +11,7 @@ let runDotNet cmd workingDir =
         DotNet.exec (DotNet.Options.withWorkingDirectory workingDir) cmd ""
     if result.ExitCode <> 0 then failwithf "'dotnet %s' failed in %s" cmd workingDir
 
-let tee f a =
-    f a
-    a
-
 let sourceDir = "."
-
-let nugetServerUrl = "http://development-nugetserver-common-stable.service.devel1-services.consul:28231"
-let sources = sprintf "-s %s -s https://api.nuget.org/v3/index.json" nugetServerUrl
 
 Target.create "Clean" (fun _ ->
     !! "**/bin"
@@ -27,7 +20,7 @@ Target.create "Clean" (fun _ ->
 )
 
 Target.create "Build" (fun _ ->
-    runDotNet (sprintf "restore --no-cache %s" sources) sourceDir
+    runDotNet "restore --no-cache" sourceDir
     runDotNet "build --no-restore" sourceDir
 
     !! "**/*.*proj"
