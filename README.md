@@ -1,6 +1,8 @@
 DDD Error Handling
 ==================
 
+[![Build Status](https://dev.azure.com/MortalFlesh/ddd-error-handling/_apis/build/status/MortalFlesh.ddd-error-handling)](https://dev.azure.com/MortalFlesh/ddd-error-handling/_build/latest?definitionId=2)
+
 Simple app for demonstrating how should be "_Errors_" handled in DDD application.
 
 ## App description
