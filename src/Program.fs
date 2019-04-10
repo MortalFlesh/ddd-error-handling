@@ -4,6 +4,10 @@ open System
 open MF.ConsoleStyle
 open CompanyDomain
 
+let tee f a =
+    f a
+    a
+
 [<EntryPoint>]
 let main argv =
     Console.title "Hello from DDD Error handling"
@@ -19,7 +23,10 @@ let main argv =
             Divisior = Console.ask "Divisior:"
         }
         |> DivideInts.byUserInput Console.message
-        |> Console.messagef "---\nResult:\n%A"
+        |> tee (fun _ -> Console.message "-------\nResult:")
+        |> function
+            | Ok result -> Console.successf "%A" result
+            | Error error -> Console.errorf "%A" error
 
         match Console.ask "Would you like to continue?" with
         | "yes"
